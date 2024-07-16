@@ -53,7 +53,7 @@ const SkillSection: React.FC = () => {
         sx={{
           textAlign: "left",
           marginBottom: 0,
-          fontSize: "4rem",
+          fontSize: "2.5rem",
           fontWeight: "700",
           marginLeft: "2rem",
         }}

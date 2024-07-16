@@ -40,15 +40,6 @@ const projects = [
     liveLink: 'https://dandrade.com.br/',
     category: 'FrontEnd',
   },
-  {
-    image: '/images/project4.jpg',
-    title: 'Projeto 4',
-    description: 'Descrição do Projeto 4',
-    githubLink: 'https://github.com/seu-repositorio/projeto4',
-    liveLink: 'https://seu-site.com/projeto4',
-    category: 'PowerBI',
-  },
-  // Adicione mais projetos conforme necessário
 ];
 
 const ProjectSection: React.FC = () => {
@@ -61,7 +52,7 @@ const ProjectSection: React.FC = () => {
         sx={{
           textAlign: 'left',
           marginBottom: 4,
-          fontSize: '4rem',
+          fontSize: '2.5rem',
           fontWeight: '700',
           marginLeft: '2rem',
         }}
@@ -70,7 +61,7 @@ const ProjectSection: React.FC = () => {
       </Typography>
       <Grid
         container
-        spacing={4}
+        spacing={4} // Ajuste o espaçamento conforme necessário
         justifyContent="center"
         sx={{
           width: '95%',
@@ -81,13 +72,14 @@ const ProjectSection: React.FC = () => {
           justifyContent: 'center',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: '0rem',
           background: '#333333',
-          height: '70vh',
+          height: 'auto', // Ajustar a altura conforme necessário
+          boxSizing: 'border-box',
+          padding: '1rem', // Adicionar padding para espaçamento interno
         }}
       >
         {projects.map((project, index) => (
-          <Grid item key={index} sx={{ width: '30%', minWidth: '250px' }}>
+          <Grid item key={index} sx={{ width: 'calc(33.33% - 2rem)', minWidth: '250px' }}>
             <ProjectCard
               image={project.image}
               title={project.title}

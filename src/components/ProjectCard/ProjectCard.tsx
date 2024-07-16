@@ -44,6 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, gi
           transition: 'opacity 0.5s ease',
           padding: '1rem',
           textAlign: 'center',
+          height: '220px',
         }}
       >
         <Typography variant="h5" component="h3" gutterBottom>

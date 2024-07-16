@@ -30,6 +30,7 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, level, color }) => {
           boxShadow: "1px 1px 2px 1px #929292",
           background: "#333333",
           padding: ".5rem",
+          height: 'auto'
         }}
       >
         {[...Array(totalDots)].map((_, index) => (

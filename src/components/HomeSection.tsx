@@ -35,14 +35,11 @@ const HomeSection: React.FC = () => {
             gutterBottom
             sx={{ fontWeight: "700", fontSize: { xs: "2rem", md: "4rem" } }}
           >
-            <TypingAnimation text="Sou o Kerman, Desenvolvedor Web Front End" />
+            <TypingAnimation text="Kerman Mendes, Desenvolvedor Front End" />
           </Typography>
           <Typography variant="body1" paragraph>
-            Tenho 24 anos, sou desenvolvedor Frontend com 3 anos de experiência utilizando tecnologias como
-            ReactJS, NextJS e React Native. Possuo um entendimento sólido de
-            arquiteturas de microsserviços e MVC, além de conhecimento em Backend. Aplico consistentemente os
-            princípios SOLID para garantir um código coeso, flexível e fácil de
-            manter. Sou apaixonado em programação Web e busco sempre aprimorar minhas habilidades
+            Tenho 24 anos, sou estudante de Ciência da Computação da UFMS, atualmente desenvolvedor Frontend com 3 anos de experiência utilizando tecnologias como
+            ReactJS, NextJS e React Native, além de conhecimentos sólidos em tecnologias backend. Sou apaixonado em programação Web e busco sempre aprimorar minhas habilidades
             para contribuir com soluções web inovadoras e eficientes.
           </Typography>
           <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 2 }}>
