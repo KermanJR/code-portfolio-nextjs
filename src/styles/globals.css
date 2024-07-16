@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  margin: 0;
+  font-family: "Work Sans", sans-serif;
+  background-color: #f7f3eb;
+  color: #333;
+  overflow: hidden; /* Remover barras de rolagem */
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* slick-carousel styles */
+.slick-prev,
+.slick-next {
+  width: 40px;
+  height: 40px;
+  z-index: 1000;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 40px;
+  color: black;
+}
+
+.slick-prev {
+  left: 10px;
+}
+
+.slick-next {
+  right: 10px;
+}
