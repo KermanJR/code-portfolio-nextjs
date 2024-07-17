@@ -3,4 +3,12 @@
     .containerBox{
         padding: 3rem 0rem;
     }
+    .containerBox2{
+        justify-content: center;
+        align-items: center;
+        padding: 3rem 2rem;
+        margin: 1rem auto;
+        margin-left: 1.5rem;
+        text-align: center;
+    }
 }

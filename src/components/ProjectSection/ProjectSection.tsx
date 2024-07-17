@@ -12,6 +12,7 @@ import ImageFA from "../../../public/projects/fenix-ato.png";
 import ImageNR from "../../../public/projects/nest-rental.png";
 import ImageDA from "../../../public/projects/dandrade.png";
 import { PreviousArrow, NextArrow } from "../Arrows/Arrows";
+import styles from './ProjectSection.module.css'
 
 const languages = { pt, en, es };
 
@@ -98,6 +99,7 @@ const ProjectSection: React.FC = () => {
         justifyContent: "center",
         padding: '2rem 4.5rem',
       }}
+      className={styles.containerBox}
     >
       <Typography
         variant="h4"

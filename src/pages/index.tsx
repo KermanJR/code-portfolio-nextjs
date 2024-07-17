@@ -7,7 +7,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import HomeSection from '../components/HomeSection/HomeSection';
 import ProjectsSection from '../components/ProjectSection/ProjectSection';
-import AboutSection from '../components/AboutSection';
+import WarningPopup from '@/components/WarningPopup/WarningPopup';
 import ContactSection from '../components/ContactSection';
 import SkillSection from '@/components/SkillSection/SkillSection';
 
@@ -48,6 +48,7 @@ const Home: React.FC = () => {
         )}
       </Box>
       <Footer />
+      <WarningPopup/>
     </Box>
   );
 };

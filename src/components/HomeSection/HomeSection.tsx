@@ -79,6 +79,7 @@ const HomeSection: React.FC = () => {
             flexDirection: "column",
             gap: "1rem",
           }}
+          className={styles.containerBox2}
         >
           <Typography
             variant="h4"
