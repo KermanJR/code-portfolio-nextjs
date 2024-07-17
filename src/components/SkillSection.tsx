@@ -60,7 +60,7 @@ const SkillSection: React.FC = () => {
       >
         <TypingAnimation text="Minhas Skills" />
       </Typography>
-      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', marginTop: 'rem'}}>
+      <Box sx={{ width: '97%', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', marginTop: '1rem', margin: '1rem auto'}}>
         <Box sx={{ width: { xs: '100%', md: '30%' }, marginBottom: 4 }}>
           <Typography variant="h6" component="h2" gutterBottom>
             Frontend

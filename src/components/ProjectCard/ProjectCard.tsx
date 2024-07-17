@@ -1,6 +1,12 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
+import { useLanguage } from '@/contexts/LanguageContext';
+import pt from '../../../src/components/locales/pt.json';
+import en from '../../../src/components/locales/en.json';
+import es from '../../../src/components/locales/es.json';
+
+const languages = { pt, en, es };
 
 interface ProjectCardProps {
   image: string;
@@ -11,7 +17,9 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, githubLink, liveLink }) => {
-  const isInProgress = description === 'Projeto em Andamento';
+  const { language } = useLanguage();
+  const translations = languages[language];
+  const isInProgress = description === translations.em_progresso;
 
   return (
     <Box
@@ -19,8 +27,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, gi
         position: 'relative',
         overflow: 'hidden',
         borderRadius: '10px',
-        height: '220px',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        height: '40vh',
         '&:hover .overlay': {
           opacity: 1,
         },
@@ -34,6 +42,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, gi
           top: 0,
           left: 0,
           width: '100%',
+          height: '100%',
           backgroundColor: 'rgba(0, 0, 0, 0.7)',
           color: 'white',
           display: 'flex',
@@ -44,7 +53,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, gi
           transition: 'opacity 0.5s ease',
           padding: '1rem',
           textAlign: 'center',
-          height: '220px',
         }}
       >
         <Typography variant="h5" component="h3" gutterBottom>
@@ -56,24 +64,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, gi
         <Button
           variant="contained"
           color="primary"
-          href={isInProgress ? '' : githubLink}
+          href={isInProgress ? '#' : githubLink}
           target={isInProgress ? '' : '_blank'}
           sx={{ mb: 1 }}
+          disabled={isInProgress}
           startIcon={isInProgress ? <LockIcon /> : null}
         >
-          {isInProgress ? 'Em Progresso' : 'GitHub'}
+          {isInProgress ? translations.em_progresso : 'GitHub'}
         </Button>
         <Button
           variant="contained"
           color="secondary"
-          href={isInProgress ? '' : liveLink}
+          href={isInProgress ? '#' : liveLink}
           target={isInProgress ? '' : '_blank'}
-
-        
-
+          disabled={isInProgress}
           startIcon={isInProgress ? <LockIcon /> : null}
         >
-          {isInProgress ? 'Em Progresso' : 'Visualizar Site'}
+          {isInProgress ? translations.em_progresso : 'Live Site'}
         </Button>
       </Box>
     </Box>

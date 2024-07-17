@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProjectsSection from './ProjectSection/ProjectSection';
 import SkillSection from './SkillSection';
+import Footer from './Footer';
 
 interface SimpleSliderProps {
   onSectionChange: (index: number) => void;
@@ -38,6 +39,8 @@ const SimpleSlider = forwardRef((props: SimpleSliderProps, ref) => {
   };
 
   return (
+    <>
+
     <Slider ref={sliderRef} {...settings}>
       <div>
         <HomeSection />
@@ -51,7 +54,10 @@ const SimpleSlider = forwardRef((props: SimpleSliderProps, ref) => {
       <div>
         <ContactSection />
       </div>
+      <Footer/>
     </Slider>
+
+    </>
   );
 });
 

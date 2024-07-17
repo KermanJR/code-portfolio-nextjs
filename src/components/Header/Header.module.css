@@ -4,5 +4,16 @@
     padding: 0 2rem; 
 }
 
+
+@media screen and(max-width: 768px) {
+    .app{
+        background-color: #c78b2c;
+        box-shadow: none;
+        padding: 0 0rem; 
+    }
+    
+}
+
+
 .appToolbar{
 }

@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 const theme = createTheme({
   typography: {
@@ -19,10 +20,13 @@ const theme = createTheme({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={theme}>
+    <LanguageProvider>
+  <ThemeProvider theme={theme}>
       <CssBaseline />
       <Component {...pageProps} />
     </ThemeProvider>
+    </LanguageProvider>
+  
   );
 }
 
