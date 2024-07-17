@@ -14,26 +14,3 @@ body {
   min-height: 100vh;
 }
 
-/* slick-carousel styles */
-.slick-prev,
-.slick-next {
-  width: 40px;
-  height: 40px;
-  z-index: 1000;
-  background-color: #333;
-  color:#333
-}
-
-.slick-prev:before,
-.slick-next:before {
-  font-size: 40px;
-  color: black;
-}
-
-.slick-prev {
-  left: 10px;
-}
-
-.slick-next {
-  right: 10px;
-}

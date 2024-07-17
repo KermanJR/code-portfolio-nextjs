@@ -8,6 +8,8 @@ import "slick-carousel/slick/slick-theme.css";
 import ProjectsSection from './ProjectSection/ProjectSection';
 import SkillSection from './SkillSection/SkillSection';
 import Footer from './Footer';
+import { NextArrow, PreviousArrow } from './Arrows/Arrows';
+import { NextArrowContainer, PreviousArrowContainer } from './Arrows/ArrowsContainer';
 
 interface SimpleSliderProps {
   onSectionChange: (index: number) => void;
@@ -26,11 +28,13 @@ const SimpleSlider = forwardRef((props: SimpleSliderProps, ref) => {
   }));
 
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    nextArrow: <NextArrowContainer />,
+    prevArrow: <PreviousArrowContainer/>,
     arrows: true,
     beforeChange: (oldIndex: number, newIndex: number) => {
       onSectionChange(newIndex);

@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 
 const ContactSection: React.FC = () => {
   return (
-    <Box sx={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 4 }}>
+    <Box sx={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 2, marginTop: '-4rem'}}>
       <Typography variant="h4" component="h1" gutterBottom>
         Em desenvolvimento
       </Typography>
