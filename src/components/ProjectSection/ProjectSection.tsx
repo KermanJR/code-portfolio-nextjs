@@ -20,7 +20,7 @@ const projects = [
   {
     image: ImageNR.src,
     title: "Nest Rental",
-    description: "Descrição do Projeto 3",
+    description: "",
     githubLink: "https://github.com/KermanJR/nest-rental-frontend",
     liveLink: "https://nestrental.com.br",
     category: "FrontEnd",
@@ -28,7 +28,7 @@ const projects = [
   {
     image: ImageFA.src,
     title: "Sistema Fênix Ato",
-    description: "Descrição do Projeto 2",
+    description: "",
     githubLink: "https://github.com/KermanJR/fenix_ato_reactjs",
     liveLink: "https://fenix.ato.br/cliente",
     category: "FrontEnd",
