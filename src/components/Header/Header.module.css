@@ -5,15 +5,17 @@
 }
 
 
-@media screen and(max-width: 768px) {
+@media (max-width: 768px) {
     .app{
-        background-color: #c78b2c;
         box-shadow: none;
-        padding: 0 0rem; 
+        padding: 0 .8rem;
+        position: fixed;
+        background-color: #ebe7e0;
+        height: 100px;
+        z-index: 2;
+    }
+    .logo{
+        width: 100px;
     }
     
-}
-
-
-.appToolbar{
 }

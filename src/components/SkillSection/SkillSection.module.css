@@ -1,0 +1,10 @@
+
+@media (max-width: 768px){
+    .containerBox{
+        padding: 3rem 1rem;
+        text-align: center;
+    }
+    .titleBox{
+        text-align: center;
+    }
+}

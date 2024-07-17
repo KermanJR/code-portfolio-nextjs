@@ -1,12 +1,12 @@
 import React, { useRef, forwardRef, useImperativeHandle } from 'react';
 import Slider from 'react-slick';
-import HomeSection from './HomeSection';
+import HomeSection from './HomeSection/HomeSection';
 import AboutSection from './AboutSection';
 import ContactSection from './ContactSection';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProjectsSection from './ProjectSection/ProjectSection';
-import SkillSection from './SkillSection';
+import SkillSection from './SkillSection/SkillSection';
 import Footer from './Footer';
 
 interface SimpleSliderProps {
@@ -54,7 +54,6 @@ const SimpleSlider = forwardRef((props: SimpleSliderProps, ref) => {
       <div>
         <ContactSection />
       </div>
-      <Footer/>
     </Slider>
 
     </>

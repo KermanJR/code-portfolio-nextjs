@@ -5,11 +5,11 @@ import Box from '@mui/material/Box';
 import SimpleSlider from '@/components/Slider';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import HomeSection from '../components/HomeSection';
+import HomeSection from '../components/HomeSection/HomeSection';
 import ProjectsSection from '../components/ProjectSection/ProjectSection';
 import AboutSection from '../components/AboutSection';
 import ContactSection from '../components/ContactSection';
-import SkillSection from '@/components/SkillSection';
+import SkillSection from '@/components/SkillSection/SkillSection';
 
 const Home: React.FC = () => {
   const [currentSection, setCurrentSection] = useState(0);

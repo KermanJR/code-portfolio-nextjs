@@ -80,7 +80,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, gi
           disabled={isInProgress}
           startIcon={isInProgress ? <LockIcon /> : null}
         >
-          {isInProgress ? translations.em_progresso : 'Live Site'}
+          {isInProgress ? translations.em_progresso : 'Visualizar Site'}
         </Button>
       </Box>
     </Box>
