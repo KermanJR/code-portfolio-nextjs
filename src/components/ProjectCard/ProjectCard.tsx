@@ -1,86 +1,64 @@
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import LockIcon from '@mui/icons-material/Lock';
-import { useLanguage } from '@/contexts/LanguageContext';
-import pt from '../../../src/components/locales/pt.json';
-import en from '../../../src/components/locales/en.json';
-import es from '../../../src/components/locales/es.json';
-
-const languages = { pt, en, es };
+import React from "react";
+import { Box, Typography, Button } from "@mui/material";
 
 interface ProjectCardProps {
-  image: string;
-  title: string;
-  description: string;
-  githubLink: string;
-  liveLink: string;
+  project: {
+    image: string;
+    title: string;
+    description: string;
+    githubLink: string;
+    liveLink: string;
+  };
+  onOpenModal: (project: any) => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, githubLink, liveLink }) => {
-  const { language } = useLanguage();
-  const translations = languages[language];
-  const isInProgress = description === translations.em_progresso;
-
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }) => {
   return (
     <Box
       sx={{
-        position: 'relative',
-        overflow: 'hidden',
-        borderRadius: '10px',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-        height: '40vh',
-        '&:hover .overlay': {
+        position: "relative",
+        "&:hover .overlay": {
           opacity: 1,
         },
       }}
     >
-      <Box component="img" src={image} alt={title} sx={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      <Box
+        component="img"
+        src={project.image}
+        alt={project.title}
+        sx={{
+          width: "100%",
+          height: "40vh",
+          borderRadius: "10px",
+          objectFit: 'cover'
+        }}
+      />
       <Box
         className="overlay"
         sx={{
-          position: 'absolute',
+          position: "absolute",
           top: 0,
           left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          color: 'white',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0,0,0,0.7)",
+          color: "white",
+          borderRadius: "10px",
           opacity: 0,
-          transition: 'opacity 0.5s ease',
-          padding: '1rem',
-          textAlign: 'center',
+          transition: "opacity 0.3s",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <Typography variant="h5" component="h3" gutterBottom>
-          {title}
-        </Typography>
-        <Typography variant="body1" paragraph>
-          {description}
-        </Typography>
+        <Typography variant="h6">{project.title}</Typography>
         <Button
           variant="contained"
           color="primary"
-          href={isInProgress ? '#' : githubLink}
-          target={isInProgress ? '' : '_blank'}
-          sx={{ mb: 1 }}
-          disabled={isInProgress}
-          startIcon={isInProgress ? <LockIcon /> : null}
+          onClick={() => onOpenModal(project)}
         >
-          {isInProgress ? translations.em_progresso : 'GitHub'}
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          href={isInProgress ? '#' : liveLink}
-          target={isInProgress ? '' : '_blank'}
-          disabled={isInProgress}
-          startIcon={isInProgress ? <LockIcon /> : null}
-        >
-          {isInProgress ? translations.em_progresso : 'Visualizar Site'}
+          Ver Mais
         </Button>
       </Box>
     </Box>

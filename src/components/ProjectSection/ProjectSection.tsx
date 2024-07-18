@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Button, ButtonGroup } from "@mui/material";
+import { Box, Typography, Button, ButtonGroup, Modal } from "@mui/material";
 import Slider from "react-slick";
 import ProjectCard from "../ProjectCard/ProjectCard";
 import TypingAnimation from "../TypingAnimation/TypingAnimation";
@@ -11,8 +11,9 @@ import ImageBB from "../../../public/projects/busca-buffet.png";
 import ImageFA from "../../../public/projects/fenix-ato.png";
 import ImageNR from "../../../public/projects/nest-rental.png";
 import ImageDA from "../../../public/projects/dandrade.png";
+import ImageNT from "../../../public/projects/nest.png";
 import { PreviousArrow, NextArrow } from "../Arrows/Arrows";
-import styles from './ProjectSection.module.css'
+import styles from './ProjectSection.module.css';
 
 const languages = { pt, en, es };
 
@@ -49,17 +50,35 @@ const projects = [
     liveLink: "https://dandrade.com.br/",
     category: "FrontEnd",
   },
-
+  {
+    image: ImageNT.src,
+    title: "MyCoffe Service API",
+    description: "À ser adicionada",
+    githubLink: "https://github.com/KermanJR/Coffe-Digital-API",
+    liveLink: "",
+    category: "BackEnd",
+  },
 ];
 
 const ProjectSection: React.FC = () => {
   const { language } = useLanguage();
   const translations = languages[language];
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
 
   const filteredProjects = selectedCategory
     ? projects.filter((project) => project.category === selectedCategory)
     : projects;
+
+  const handleOpen = (project: any) => {
+    setSelectedProject(project);
+    setOpen(true);
+  };
+
+  console.log(filteredProjects)
+
+  const handleClose = () => setOpen(false);
 
   const settings = {
     dots: false,
@@ -106,7 +125,7 @@ const ProjectSection: React.FC = () => {
         component="h1"
         gutterBottom
         sx={{
-          textAlign: {sm: "right", lg: 'left', md: 'left'},
+          textAlign: { sm: "right", lg: 'left', md: 'left' },
           marginBottom: 4,
           fontSize: { xs: "2.5rem", md: "2.5rem", lg: "3rem" },
           fontWeight: "700",
@@ -115,19 +134,34 @@ const ProjectSection: React.FC = () => {
         <TypingAnimation text={translations.meus_projetos} />
       </Typography>
       <ButtonGroup variant="outlined" sx={{ marginBottom: 2, alignSelf: 'left' }}>
-        <Button onClick={() => setSelectedCategory(null)}>
+        <Button
+          onClick={() => setSelectedCategory(null)}
+          sx={{ color: selectedCategory === null ? 'primary.main' : 'inherit' }}
+        >
           Todos
         </Button>
-        <Button onClick={() => setSelectedCategory('FrontEnd')}>
+        <Button
+          onClick={() => setSelectedCategory('FrontEnd')}
+          sx={{ color: selectedCategory === 'FrontEnd' ? 'primary.main' : 'inherit' }}
+        >
           FrontEnd
         </Button>
-        <Button onClick={() => setSelectedCategory('BackEnd')}>
+        <Button
+          onClick={() => setSelectedCategory('BackEnd')}
+          sx={{ color: selectedCategory === 'BackEnd' ? 'primary.main' : 'inherit' }}
+        >
           BackEnd
         </Button>
-        <Button onClick={() => setSelectedCategory('IA')}>
+        <Button
+          onClick={() => setSelectedCategory('IA')}
+          sx={{ color: selectedCategory === 'IA' ? 'primary.main' : 'inherit' }}
+        >
           IA
         </Button>
-        <Button onClick={() => setSelectedCategory('PowerBI')}>
+        <Button
+          onClick={() => setSelectedCategory('PowerBI')}
+          sx={{ color: selectedCategory === 'PowerBI' ? 'primary.main' : 'inherit' }}
+        >
           PowerBI
         </Button>
       </ButtonGroup>
@@ -140,24 +174,43 @@ const ProjectSection: React.FC = () => {
           padding: 2,
         }}
       >
-        {filteredProjects.length > 0? <Slider {...settings}>
-          {filteredProjects.map((project, index) => (
-            <Box key={index} sx={{ padding: 2 }}>
-              <ProjectCard
-                image={project.image}
-                title={project.title}
-                description={project.description}
-                githubLink={project.githubLink}
-                liveLink={project.liveLink}
-              />
-            </Box>
-          ))}
-        </Slider>: 
-         <Box  sx={{ padding: 2, height: '45.3vh', textAlign: 'center', margin: '0 auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-        <Typography sx={{color: 'white'}}>A ser adicionado...</Typography>
-       </Box>}
-        
+        {filteredProjects.length > 0 ? (
+          <Slider {...settings}>
+            {filteredProjects.map((project, index) => (
+              <Box key={index} sx={{ padding: 2 }}>
+                <ProjectCard
+                  project={project}
+                  onOpenModal={handleOpen}
+                />
+              </Box>
+            ))}
+          </Slider>
+        ) : (
+          <Box sx={{ padding: 2, height: '45.3vh', textAlign: 'center', margin: '0 auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+            <Typography sx={{ color: 'white' }}>A ser adicionado...</Typography>
+          </Box>
+        )}
       </Box>
+      {selectedProject && (
+        <Modal open={open} onClose={handleClose}>
+          <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60%', bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4, borderRadius: '4px' }}>
+            <Typography variant="h4" component="h2" sx={{ fontWeight: '700' }}>
+              {selectedProject.title}
+            </Typography>
+            <Typography sx={{ mt: 2 }}>
+              {selectedProject.description || "Descrição não disponível"}
+            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+              <Button variant="contained" color="primary" href={selectedProject.liveLink} target="_blank">
+                Ver Site
+              </Button>
+              <Button variant="contained" color="secondary" href={selectedProject.githubLink} target="_blank">
+                Ver GitHub
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
+      )}
     </Box>
   );
 };
