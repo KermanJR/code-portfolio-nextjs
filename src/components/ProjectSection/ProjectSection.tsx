@@ -50,14 +50,14 @@ const projects = [
     liveLink: "https://dandrade.com.br/",
     category: "FrontEnd",
   },
-  {
+ /* {
     image: ImageNT.src,
     title: "MyCoffe Service API",
     description: "À ser adicionada",
     githubLink: "https://github.com/KermanJR/Coffe-Digital-API",
     liveLink: "",
     category: "BackEnd",
-  },
+  },*/
 ];
 
 const ProjectSection: React.FC = () => {
@@ -76,7 +76,7 @@ const ProjectSection: React.FC = () => {
     setOpen(true);
   };
 
-  console.log(filteredProjects)
+
 
   const handleClose = () => setOpen(false);
 
