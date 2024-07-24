@@ -10,6 +10,7 @@ import SkillSection from './SkillSection/SkillSection';
 import Footer from './Footer';
 import { NextArrow, PreviousArrow } from './Arrows/Arrows';
 import { NextArrowContainer, PreviousArrowContainer } from './Arrows/ArrowsContainer';
+import CodeRunner from './CodeRunner/CodeRunner';
 
 interface SimpleSliderProps {
   onSectionChange: (index: number) => void;
@@ -57,6 +58,9 @@ const SimpleSlider = forwardRef((props: SimpleSliderProps, ref) => {
       </div>
       <div>
         <ContactSection />
+      </div>
+      <div>
+        <CodeRunner/>
       </div>
     </Slider>
 

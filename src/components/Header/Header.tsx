@@ -18,7 +18,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import Logo from "../../../public/logo.png";
 import styles from "./Header.module.css";
 
-const sections = ["Início", "Projetos", "Habilidades", "Sobre Mim"];
+const sections = ["Início", "Projetos", "Habilidades", "Sobre Mim", ""];
 
 interface HeaderProps {
   currentSection: number;

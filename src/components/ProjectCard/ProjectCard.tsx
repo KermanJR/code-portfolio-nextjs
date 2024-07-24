@@ -30,7 +30,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }) => {
           width: "100%",
           height: "40vh",
           borderRadius: "10px",
-          objectFit: 'cover'
+          objectFit: 'cover',
+          textAlign: 'center'
         }}
       />
       <Box
@@ -50,6 +51,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }) => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          textAlign: 'center',
+          padding: '.5rem'
         }}
       >
         <Typography variant="h6">{project.title}</Typography>

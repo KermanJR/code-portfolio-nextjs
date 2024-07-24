@@ -11,7 +11,8 @@ import ImageBB from "../../../public/projects/busca-buffet.png";
 import ImageFA from "../../../public/projects/fenix-ato.png";
 import ImageNR from "../../../public/projects/nest-rental.png";
 import ImageDA from "../../../public/projects/dandrade.png";
-import ImageNT from "../../../public/projects/nest.png";
+import ImageTG from "../../../public/projects/telegram.png";
+import ImageBI from "../../../public/projects/bi-comercial.jpeg";
 import { PreviousArrow, NextArrow } from "../Arrows/Arrows";
 import styles from './ProjectSection.module.css';
 
@@ -50,14 +51,22 @@ const projects = [
     liveLink: "https://dandrade.com.br/",
     category: "FrontEnd",
   },
- /* {
-    image: ImageNT.src,
-    title: "MyCoffe Service API",
-    description: "À ser adicionada",
-    githubLink: "https://github.com/KermanJR/Coffe-Digital-API",
+  {
+    image: ImageTG.src,
+    title: "Classificador de Imagens com Bot Telegram - Rede Convolucional",
+    description: "Este repositório contém uma implementação genérica para classificação de imagens utilizando AlexNet. O código permite que os usuários definam suas próprias classes e datasets para treinar e avaliar o modelo. Além disso, há um script para integração com um bot do Telegram que permite a classificação de imagens diretamente pelo aplicativo.",
+    githubLink: "https://github.com/KermanJR/image-classifier-alexnet-telegram",
     liveLink: "",
-    category: "BackEnd",
-  },*/
+    category: "IA",
+  },
+  {
+    image: ImageBI.src,
+    title: "Dashboard de Análise de Desempenho Comercial",
+    description: "Este dashboard fornece uma visão abrangente do desempenho comercial da empresa, oferecendo insights detalhados sobre receitas, custos e margens de lucro. Com ele, é possível analisar a receita total, custo total e receita líquida, segmentados por período e por marca. Além disso, o dashboard permite uma visualização clara dos descontos aplicados, destacando o percentual de desconto sobre as vendas totais.",
+    githubLink: "",
+    liveLink: "",
+    category: "PowerBI",
+  },
 ];
 
 const ProjectSection: React.FC = () => {
@@ -65,6 +74,7 @@ const ProjectSection: React.FC = () => {
   const translations = languages[language];
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+  const [openDashboard, setOpenDashboard] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
 
   const filteredProjects = selectedCategory
@@ -76,13 +86,19 @@ const ProjectSection: React.FC = () => {
     setOpen(true);
   };
 
+  const handleClose = () => {
+    setOpen(false);
+    setOpenDashboard(false);
+  };
 
-
-  const handleClose = () => setOpen(false);
+  const handleOpenDashboard = () => {
+    setOpen(false);
+    setOpenDashboard(true);
+  };
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: filteredProjects.length > 3,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -94,7 +110,7 @@ const ProjectSection: React.FC = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          infinite: true,
+          infinite: filteredProjects.length > 2,
           dots: true,
         },
       },
@@ -103,6 +119,7 @@ const ProjectSection: React.FC = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          infinite: filteredProjects.length > 1,
         },
       },
     ],
@@ -192,24 +209,48 @@ const ProjectSection: React.FC = () => {
         )}
       </Box>
       {selectedProject && (
-        <Modal open={open} onClose={handleClose}>
-          <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60%', bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4, borderRadius: '4px' }}>
-            <Typography variant="h4" component="h2" sx={{ fontWeight: '700' }}>
-              {selectedProject.title}
-            </Typography>
-            <Typography sx={{ mt: 2 }}>
-              {selectedProject.description || "Descrição não disponível"}
-            </Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-              <Button variant="contained" color="primary" href={selectedProject.liveLink} target="_blank">
-                Ver Site
-              </Button>
-              <Button variant="contained" color="secondary" href={selectedProject.githubLink} target="_blank">
-                Ver GitHub
-              </Button>
+        <>
+          <Modal open={open} onClose={handleClose} >
+            <Box className={styles.powerbi} sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60%', bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4, borderRadius: '4px' }}>
+              <Typography variant="h4" component="h2" sx={{ fontWeight: '700' }}>
+                {selectedProject.title}
+              </Typography>
+              <Typography sx={{ mt: 2 }}>
+                {selectedProject.description || "Descrição não disponível"}
+              </Typography>
+              {selectedProject.category === 'PowerBI' ? (
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+                  <Button variant="contained" color="primary" onClick={handleOpenDashboard}>
+                    Ver Dashboard
+                  </Button>
+                </Box>
+              ) : (
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+                  <Button variant="contained" color="primary" href={selectedProject.liveLink} target="_blank">
+                    Ver Site
+                  </Button>
+                  <Button variant="contained" color="secondary" href={selectedProject.githubLink} target="_blank">
+                    Ver GitHub
+                  </Button>
+                </Box>
+              )}
             </Box>
-          </Box>
-        </Modal>
+          </Modal>
+          {selectedProject.category === 'PowerBI' && (
+            <Modal open={openDashboard} onClose={handleClose} className={styles.powerbi}>
+              <Box className={styles.powerbi}  sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80%', height: '80%', bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4, borderRadius: '4px' }}>
+                <iframe
+                  title="dashboard-comercial"
+                  width="100%"
+                  height="100%"
+                  src="https://app.powerbi.com/view?r=eyJrIjoiZjQ1ZDQxMzQtMDEyMS00Y2YwLTg4YjctZjViYjMwOWFlMmNkIiwidCI6IjU5MWNjZTQ0LTAwM2EtNGMwZi1hNDBlLTYxMmZhMjJiYTllMiJ9"
+                  frameBorder="0"
+                  allowFullScreen
+                ></iframe>
+              </Box>
+            </Modal>
+          )}
+        </>
       )}
     </Box>
   );
