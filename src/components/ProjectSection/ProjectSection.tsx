@@ -13,6 +13,7 @@ import ImageNR from "../../../public/projects/nest-rental.png";
 import ImageDA from "../../../public/projects/dandrade.png";
 import ImageTG from "../../../public/projects/telegram.png";
 import ImageBI from "../../../public/projects/bi-comercial.jpeg";
+import ImageBI2 from "../../../public/projects/bi-financeiro.jpeg";
 import { PreviousArrow, NextArrow } from "../Arrows/Arrows";
 import styles from './ProjectSection.module.css';
 
@@ -54,8 +55,8 @@ const projects = [
   {
     image: ImageTG.src,
     title: "Classificador de Imagens com Bot Telegram - Rede Convolucional",
-    description: "Este repositório contém uma implementação genérica para classificação de imagens utilizando AlexNet. O código permite que os usuários definam suas próprias classes e datasets para treinar e avaliar o modelo. Além disso, há um script para integração com um bot do Telegram que permite a classificação de imagens diretamente pelo aplicativo.",
-    githubLink: "https://github.com/KermanJR/image-classifier-alexnet-telegram",
+    description: "",
+    githubLink: "",
     liveLink: "",
     category: "IA",
   },
@@ -64,7 +65,15 @@ const projects = [
     title: "Dashboard de Análise de Desempenho Comercial",
     description: "Este dashboard fornece uma visão abrangente do desempenho comercial da empresa, oferecendo insights detalhados sobre receitas, custos e margens de lucro. Com ele, é possível analisar a receita total, custo total e receita líquida, segmentados por período e por marca. Além disso, o dashboard permite uma visualização clara dos descontos aplicados, destacando o percentual de desconto sobre as vendas totais.",
     githubLink: "",
-    liveLink: "",
+    liveLink: "https://app.powerbi.com/view?r=eyJrIjoiZjQ1ZDQxMzQtMDEyMS00Y2YwLTg4YjctZjViYjMwOWFlMmNkIiwidCI6IjU5MWNjZTQ0LTAwM2EtNGMwZi1hNDBlLTYxMmZhMjJiYTllMiJ9",
+    category: "PowerBI",
+  },
+  {
+    image: ImageBI2.src,
+    title: "Dashboard de Vendas",
+    description: "Este dashboard fornece uma visão detalhada sobre as vendas de uma empresa, oferecendo insights sobre os produtos mais vendidos, regiões de maior venda e análise de performance de vendas por período, sexo e categoria.",
+    githubLink: "",
+    liveLink: "https://app.powerbi.com/view?r=eyJrIjoiOTc3MjhkYzctN2Q2My00M2I1LWI1NmEtMzI2MGEzZmM4NzExIiwidCI6IjU5MWNjZTQ0LTAwM2EtNGMwZi1hNDBlLTYxMmZhMjJiYTllMiJ9",
     category: "PowerBI",
   },
 ];
@@ -210,8 +219,8 @@ const ProjectSection: React.FC = () => {
       </Box>
       {selectedProject && (
         <>
-          <Modal open={open} onClose={handleClose} >
-            <Box className={styles.powerbi} sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60%', bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4, borderRadius: '4px' }}>
+          <Modal open={open} onClose={handleClose}>
+            <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60%', bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4, borderRadius: '4px' }}>
               <Typography variant="h4" component="h2" sx={{ fontWeight: '700' }}>
                 {selectedProject.title}
               </Typography>
@@ -219,7 +228,7 @@ const ProjectSection: React.FC = () => {
                 {selectedProject.description || "Descrição não disponível"}
               </Typography>
               {selectedProject.category === 'PowerBI' ? (
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
                   <Button variant="contained" color="primary" onClick={handleOpenDashboard}>
                     Ver Dashboard
                   </Button>
@@ -236,20 +245,18 @@ const ProjectSection: React.FC = () => {
               )}
             </Box>
           </Modal>
-          {selectedProject.category === 'PowerBI' && (
-            <Modal open={openDashboard} onClose={handleClose} className={styles.powerbi}>
-              <Box className={styles.powerbi}  sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80%', height: '80%', bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4, borderRadius: '4px' }}>
-                <iframe
-                  title="dashboard-comercial"
-                  width="100%"
-                  height="100%"
-                  src="https://app.powerbi.com/view?r=eyJrIjoiZjQ1ZDQxMzQtMDEyMS00Y2YwLTg4YjctZjViYjMwOWFlMmNkIiwidCI6IjU5MWNjZTQ0LTAwM2EtNGMwZi1hNDBlLTYxMmZhMjJiYTllMiJ9"
-                  frameBorder="0"
-                  allowFullScreen
-                ></iframe>
-              </Box>
-            </Modal>
-          )}
+          <Modal open={openDashboard} onClose={handleClose}>
+            <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80%', height: '80%', bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4, borderRadius: '4px' }}>
+              <iframe
+                title="dashboard-comercial"
+                width="100%"
+                height="100%"
+                src={selectedProject.liveLink}
+                frameBorder="0"
+                allowFullScreen
+              ></iframe>
+            </Box>
+          </Modal>
         </>
       )}
     </Box>
