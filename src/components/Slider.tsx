@@ -1,16 +1,12 @@
 import React, { useRef, forwardRef, useImperativeHandle } from 'react';
 import Slider from 'react-slick';
-import HomeSection from './HomeSection/HomeSection';
+import HomeSection from './HomeSection';
 import AboutSection from './AboutSection';
 import ContactSection from './ContactSection';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProjectsSection from './ProjectSection/ProjectSection';
-import SkillSection from './SkillSection/SkillSection';
-import Footer from './Footer';
-import { NextArrow, PreviousArrow } from './Arrows/Arrows';
-import { NextArrowContainer, PreviousArrowContainer } from './Arrows/ArrowsContainer';
-import CodeRunner from './CodeRunner/CodeRunner';
+import SkillSection from './SkillSection';
 
 interface SimpleSliderProps {
   onSectionChange: (index: number) => void;
@@ -29,13 +25,11 @@ const SimpleSlider = forwardRef((props: SimpleSliderProps, ref) => {
   }));
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    nextArrow: <NextArrowContainer />,
-    prevArrow: <PreviousArrowContainer/>,
     arrows: true,
     beforeChange: (oldIndex: number, newIndex: number) => {
       onSectionChange(newIndex);
@@ -44,8 +38,6 @@ const SimpleSlider = forwardRef((props: SimpleSliderProps, ref) => {
   };
 
   return (
-    <>
-
     <Slider ref={sliderRef} {...settings}>
       <div>
         <HomeSection />
@@ -59,12 +51,7 @@ const SimpleSlider = forwardRef((props: SimpleSliderProps, ref) => {
       <div>
         <ContactSection />
       </div>
-      <div>
-        <CodeRunner/>
-      </div>
     </Slider>
-
-    </>
   );
 });
 

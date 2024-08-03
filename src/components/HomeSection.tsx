@@ -7,7 +7,6 @@ import Image from "next/image";
 import MyPhoto from "../../public/my-photo.png";
 import SkillBar from "./SkillBar/SkillBar";
 import TypingAnimation from "./TypingAnimation/TypingAnimation";
-import SkillChart from "./RadarChart/SkillChart";
 
 const HomeSection: React.FC = () => {
   return (
@@ -18,7 +17,7 @@ const HomeSection: React.FC = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: { xs: "1rem", md: "7rem" },
+        padding: { xs: "2rem", md: "7rem" },
         overflow: { xs: "visible", md: "hidden" },
         flexDirection: { xs: "column", md: "row" },
       }}
@@ -28,19 +27,18 @@ const HomeSection: React.FC = () => {
         spacing={4}
         alignItems="center"
         justifyContent="center"
-
       >
-        <Grid item xs={10} md={4} sx={{ width: { xs: "100%", md: "40%" } }}>
+        <Grid item xs={12} md={4} sx={{ width: { xs: "100%", md: "40%" } }}>
           <Typography
             variant="h3"
             component="h1"
             gutterBottom
-            sx={{ fontWeight: "700", fontSize: { xs: "2rem", md: "2rem" } }}
+            sx={{ fontWeight: "700", fontSize: { xs: "2rem", md: "4rem" } }}
           >
             <TypingAnimation text="Kerman Mendes, Desenvolvedor Front End" />
           </Typography>
           <Typography variant="body1" paragraph>
-            Tenho 24 anos, estudante de Ciência da Computação da UFMS, atualmente desenvolvedor Frontend com 3 anos de experiência utilizando tecnologias como
+            Tenho 24 anos, sou estudante de Ciência da Computação da UFMS, atualmente desenvolvedor Frontend com 3 anos de experiência utilizando tecnologias como
             ReactJS, NextJS e React Native, além de conhecimentos sólidos em tecnologias backend. Sou apaixonado em programação Web e busco sempre aprimorar minhas habilidades
             para contribuir com soluções web inovadoras e eficientes.
           </Typography>
@@ -85,7 +83,17 @@ const HomeSection: React.FC = () => {
           >
             Principais Skills
           </Typography>
-          <SkillChart/>
+          <SkillBar skill="ReactJS" level={90} color="#FFD700" />
+          <SkillBar skill="NextJS" level={85} color="#FFA500" />
+          <SkillBar skill="NodeJS" level={80} color="#FF4500" />
+          <SkillBar skill="Docker" level={75} color="#c45f3a" />
+          <Typography
+            variant="body1"
+            paragraph
+            sx={{ fontSize: "1rem", textAlign: "left" }}
+          >
+            ...
+          </Typography>
         </Grid>
       </Grid>
     </Box>

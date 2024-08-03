@@ -1,67 +1,79 @@
-import React from "react";
-import { Box, Typography, Button } from "@mui/material";
+import React from 'react';
+import { Box, Typography, Button } from '@mui/material';
+import LockIcon from '@mui/icons-material/Lock';
 
 interface ProjectCardProps {
-  project: {
-    image: string;
-    title: string;
-    description: string;
-    githubLink: string;
-    liveLink: string;
-  };
-  onOpenModal: (project: any) => void;
+  image: string;
+  title: string;
+  description: string;
+  githubLink: string;
+  liveLink: string;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, githubLink, liveLink }) => {
+  const isInProgress = description === 'Projeto em Andamento';
+
   return (
     <Box
       sx={{
-        position: "relative",
-        "&:hover .overlay": {
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: '10px',
+        height: '220px',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        '&:hover .overlay': {
           opacity: 1,
         },
       }}
     >
-      <Box
-        component="img"
-        src={project.image}
-        alt={project.title}
-        sx={{
-          width: "100%",
-          height: "40vh",
-          borderRadius: "10px",
-          objectFit: 'cover',
-          textAlign: 'center'
-        }}
-      />
+      <Box component="img" src={image} alt={title} sx={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       <Box
         className="overlay"
         sx={{
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: "rgba(0,0,0,0.7)",
-          color: "white",
-          borderRadius: "10px",
+          width: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          color: 'white',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
           opacity: 0,
-          transition: "opacity 0.3s",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
+          transition: 'opacity 0.5s ease',
+          padding: '1rem',
           textAlign: 'center',
-          padding: '.5rem'
+          height: '220px',
         }}
       >
-        <Typography variant="h6">{project.title}</Typography>
+        <Typography variant="h5" component="h3" gutterBottom>
+          {title}
+        </Typography>
+        <Typography variant="body1" paragraph>
+          {description}
+        </Typography>
         <Button
           variant="contained"
           color="primary"
-          onClick={() => onOpenModal(project)}
+          href={isInProgress ? '' : githubLink}
+          target={isInProgress ? '' : '_blank'}
+          sx={{ mb: 1 }}
+          startIcon={isInProgress ? <LockIcon /> : null}
         >
-          Ver Mais
+          {isInProgress ? 'Em Progresso' : 'GitHub'}
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          href={isInProgress ? '' : liveLink}
+          target={isInProgress ? '' : '_blank'}
+
+        
+
+          startIcon={isInProgress ? <LockIcon /> : null}
+        >
+          {isInProgress ? 'Em Progresso' : 'Visualizar Site'}
         </Button>
       </Box>
     </Box>

@@ -1,264 +1,95 @@
-import React, { useState } from "react";
-import { Box, Typography, Button, ButtonGroup, Modal } from "@mui/material";
-import Slider from "react-slick";
-import ProjectCard from "../ProjectCard/ProjectCard";
-import TypingAnimation from "../TypingAnimation/TypingAnimation";
-import { useLanguage } from "../../contexts/LanguageContext";
-import pt from "../../../src/components/locales/pt.json";
-import en from "../../../src/components/locales/en.json";
-import es from "../../../src/components/locales/es.json";
-import ImageBB from "../../../public/projects/busca-buffet.png";
-import ImageFA from "../../../public/projects/fenix-ato.png";
-import ImageNR from "../../../public/projects/nest-rental.png";
-import ImageDA from "../../../public/projects/dandrade.png";
-import ImageTG from "../../../public/projects/telegram.png";
-import ImageBI from "../../../public/projects/bi-comercial.jpeg";
-import ImageBI2 from "../../../public/projects/bi-financeiro.jpeg";
-import { PreviousArrow, NextArrow } from "../Arrows/Arrows";
-import styles from './ProjectSection.module.css';
-
-const languages = { pt, en, es };
+import React from 'react';
+import { Box, Typography, Grid } from '@mui/material';
+import ProjectCard from '../ProjectCard/ProjectCard';
+import TypingAnimation from '../TypingAnimation/TypingAnimation';
+import ImageBB from '../../../public/projects/busca-buffet.png';
+import ImageFA from '../../../public/projects/fenix-ato.png';
+import ImageNR from '../../../public/projects/nest-rental.png';
+import ImageDA from '../../../public/projects/dandrade.png';
 
 const projects = [
   {
     image: ImageNR.src,
-    title: "Nest Rental",
-    description: "",
-    githubLink: "https://github.com/KermanJR/nest-rental-frontend",
-    liveLink: "https://nestrental.com.br",
-    category: "FrontEnd",
+    title: 'Nest Rental',
+    description: 'Descrição do Projeto 3',
+    githubLink: 'https://github.com/KermanJR/nest-rental-frontend',
+    liveLink: 'https://nestrental.com.br',
+    category: 'FrontEnd',
   },
   {
     image: ImageFA.src,
-    title: "Sistema Fênix Ato",
-    description: "",
-    githubLink: "https://github.com/KermanJR/fenix_ato_reactjs",
-    liveLink: "https://fenix.ato.br/cliente",
-    category: "FrontEnd",
+    title: 'Sistema Fênix Ato',
+    description: 'Descrição do Projeto 2',
+    githubLink: 'https://github.com/KermanJR/fenix_ato_reactjs',
+    liveLink: 'https://fenix.ato.br/cliente',
+    category: 'FrontEnd',
   },
   {
     image: ImageBB.src,
-    title: "Busca Buffet",
-    description: "Projeto em Andamento",
-    githubLink: "https://github.com/KermanJR/projeto_buffet",
-    liveLink: "https://buscabuffet.com.br",
-    category: "FrontEnd",
+    title: 'Busca Buffet',
+    description: '',
+    githubLink: 'https://github.com/KermanJR/projeto_buffet',
+    liveLink: 'https://buscabuffet.com.br',
+    category: 'FrontEnd',
   },
   {
     image: ImageDA.src,
-    title: "D. Andrade",
-    description: "Projeto em Andamento",
-    githubLink: "",
-    liveLink: "https://dandrade.com.br/",
-    category: "FrontEnd",
-  },
-  {
-    image: ImageTG.src,
-    title: "Classificador de Imagens com Bot Telegram - Rede Convolucional",
-    description: "",
-    githubLink: "",
-    liveLink: "",
-    category: "IA",
-  },
-  {
-    image: ImageBI.src,
-    title: "Dashboard de Análise de Desempenho Comercial",
-    description: "Este dashboard fornece uma visão abrangente do desempenho comercial da empresa, oferecendo insights detalhados sobre receitas, custos e margens de lucro. Com ele, é possível analisar a receita total, custo total e receita líquida, segmentados por período e por marca. Além disso, o dashboard permite uma visualização clara dos descontos aplicados, destacando o percentual de desconto sobre as vendas totais.",
-    githubLink: "",
-    liveLink: "https://app.powerbi.com/view?r=eyJrIjoiZjQ1ZDQxMzQtMDEyMS00Y2YwLTg4YjctZjViYjMwOWFlMmNkIiwidCI6IjU5MWNjZTQ0LTAwM2EtNGMwZi1hNDBlLTYxMmZhMjJiYTllMiJ9",
-    category: "PowerBI",
-  },
-  {
-    image: ImageBI2.src,
-    title: "Dashboard de Vendas",
-    description: "Este dashboard fornece uma visão detalhada sobre as vendas de uma empresa, oferecendo insights sobre os produtos mais vendidos, regiões de maior venda e análise de performance de vendas por período, sexo e categoria.",
-    githubLink: "",
-    liveLink: "https://app.powerbi.com/view?r=eyJrIjoiOTc3MjhkYzctN2Q2My00M2I1LWI1NmEtMzI2MGEzZmM4NzExIiwidCI6IjU5MWNjZTQ0LTAwM2EtNGMwZi1hNDBlLTYxMmZhMjJiYTllMiJ9",
-    category: "PowerBI",
+    title: 'D. Andrade',
+    description: 'Projeto em Andamento',
+    githubLink: '',
+    liveLink: 'https://dandrade.com.br/',
+    category: 'FrontEnd',
   },
 ];
 
 const ProjectSection: React.FC = () => {
-  const { language } = useLanguage();
-  const translations = languages[language];
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [open, setOpen] = useState(false);
-  const [openDashboard, setOpenDashboard] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<any>(null);
-
-  const filteredProjects = selectedCategory
-    ? projects.filter((project) => project.category === selectedCategory)
-    : projects;
-
-  const handleOpen = (project: any) => {
-    setSelectedProject(project);
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setOpenDashboard(false);
-  };
-
-  const handleOpenDashboard = () => {
-    setOpen(false);
-    setOpenDashboard(true);
-  };
-
-  const settings = {
-    dots: false,
-    infinite: filteredProjects.length > 3,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PreviousArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: filteredProjects.length > 2,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: filteredProjects.length > 1,
-        },
-      },
-    ],
-  };
-
   return (
-    <Box
-      id="projetos"
-      sx={{
-        height: "auto",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: '2rem 4.5rem',
-      }}
-      className={styles.containerBox}
-    >
+    <Box id="projetos" sx={{ padding: 4 }}>
       <Typography
         variant="h4"
         component="h1"
         gutterBottom
         sx={{
-          textAlign: { sm: "right", lg: 'left', md: 'left' },
+          textAlign: 'left',
           marginBottom: 4,
-          fontSize: { xs: "2.5rem", md: "2.5rem", lg: "3rem" },
-          fontWeight: "700",
+          fontSize: '2.5rem',
+          fontWeight: '700',
+          marginLeft: '2rem',
         }}
       >
-        <TypingAnimation text={translations.meus_projetos} />
+        <TypingAnimation text="Meus Projetos" />
       </Typography>
-      <ButtonGroup variant="outlined" sx={{ marginBottom: 2, alignSelf: 'left' }}>
-        <Button
-          onClick={() => setSelectedCategory(null)}
-          sx={{ color: selectedCategory === null ? 'primary.main' : 'inherit' }}
-        >
-          Todos
-        </Button>
-        <Button
-          onClick={() => setSelectedCategory('FrontEnd')}
-          sx={{ color: selectedCategory === 'FrontEnd' ? 'primary.main' : 'inherit' }}
-        >
-          FrontEnd
-        </Button>
-        <Button
-          onClick={() => setSelectedCategory('BackEnd')}
-          sx={{ color: selectedCategory === 'BackEnd' ? 'primary.main' : 'inherit' }}
-        >
-          BackEnd
-        </Button>
-        <Button
-          onClick={() => setSelectedCategory('IA')}
-          sx={{ color: selectedCategory === 'IA' ? 'primary.main' : 'inherit' }}
-        >
-          IA
-        </Button>
-        <Button
-          onClick={() => setSelectedCategory('PowerBI')}
-          sx={{ color: selectedCategory === 'PowerBI' ? 'primary.main' : 'inherit' }}
-        >
-          PowerBI
-        </Button>
-      </ButtonGroup>
-      <Box
+      <Grid
+        container
+        spacing={4} // Ajuste o espaçamento conforme necessário
+        justifyContent="center"
         sx={{
-          width: "100%",
-          margin: "0 auto",
-          background: "#333333",
-          borderRadius: "20px",
-          padding: 2,
+          width: '95%',
+          borderRadius: '20px',
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          background: '#333333',
+          height: 'auto', // Ajustar a altura conforme necessário
+          boxSizing: 'border-box',
+          padding: '1rem', // Adicionar padding para espaçamento interno
         }}
       >
-        {filteredProjects.length > 0 ? (
-          <Slider {...settings}>
-            {filteredProjects.map((project, index) => (
-              <Box key={index} sx={{ padding: 2 }}>
-                <ProjectCard
-                  project={project}
-                  onOpenModal={handleOpen}
-                />
-              </Box>
-            ))}
-          </Slider>
-        ) : (
-          <Box sx={{ padding: 2, height: '45.3vh', textAlign: 'center', margin: '0 auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-            <Typography sx={{ color: 'white' }}>A ser adicionado...</Typography>
-          </Box>
-        )}
-      </Box>
-      {selectedProject && (
-        <>
-          <Modal open={open} onClose={handleClose}>
-            <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60%', bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4, borderRadius: '4px' }}>
-              <Typography variant="h4" component="h2" sx={{ fontWeight: '700' }}>
-                {selectedProject.title}
-              </Typography>
-              <Typography sx={{ mt: 2 }}>
-                {selectedProject.description || "Descrição não disponível"}
-              </Typography>
-              {selectedProject.category === 'PowerBI' ? (
-                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-                  <Button variant="contained" color="primary" onClick={handleOpenDashboard}>
-                    Ver Dashboard
-                  </Button>
-                </Box>
-              ) : (
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-                  <Button variant="contained" color="primary" href={selectedProject.liveLink} target="_blank">
-                    Ver Site
-                  </Button>
-                  <Button variant="contained" color="secondary" href={selectedProject.githubLink} target="_blank">
-                    Ver GitHub
-                  </Button>
-                </Box>
-              )}
-            </Box>
-          </Modal>
-          <Modal open={openDashboard} onClose={handleClose}>
-            <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80%', height: '80%', bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4, borderRadius: '4px' }}>
-              <iframe
-                title="dashboard-comercial"
-                width="100%"
-                height="100%"
-                src={selectedProject.liveLink}
-                frameBorder="0"
-                allowFullScreen
-              ></iframe>
-            </Box>
-          </Modal>
-        </>
-      )}
+        {projects.map((project, index) => (
+          <Grid item key={index} sx={{ width: 'calc(33.33% - 2rem)', minWidth: '250px' }}>
+            <ProjectCard
+              image={project.image}
+              title={project.title}
+              description={project.description}
+              githubLink={project.githubLink}
+              liveLink={project.liveLink}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 };
